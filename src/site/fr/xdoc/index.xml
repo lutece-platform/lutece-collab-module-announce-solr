@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+	<properties>
+		<title>Plugin</title>
+	</properties>
+	<body>
+		<section name="Plugin">
+			<subsection name="Introduction">
+				Indexe le contenu du plugin-announce dans solr.
+			</subsection>
+		</section>
+	</body>
+</document>

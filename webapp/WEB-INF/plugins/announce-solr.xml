@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?><plug-in>
+    
+    <!-- Plugin Informations -->
+    <name>announce-solr</name>
+    <class>fr.paris.lutece.portal.service.plugin.PluginDefaultImplementation</class>
+    <version>1.0.1</version>
+    <documentation/>
+    <installation/>
+    <changes/>
+    <user-guide/>
+    <description>module.announce.solr.module.description</description>
+    <provider>module.announce.solr.module.provider</provider>
+    <provider-url>http://lutece.paris.fr</provider-url>
+    <icon-url>images/admin/skin/plugins/announce/modules/solr/announce-solr.png</icon-url>
+    <copyright>Copyright 2001-2011 Mairie de Paris</copyright>
+	<core-version-dependency>
+		<min-core-version>2.9.9</min-core-version>
+		<max-core-version/>	
+	</core-version-dependency>
+    
+    <!-- if the plugin must have a connection pool with parameter : 1 - yes, 0 - no -->
+    <db-pool-required>0</db-pool-required>
+    
+</plug-in>
