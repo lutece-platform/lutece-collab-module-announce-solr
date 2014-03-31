@@ -37,7 +37,6 @@ import fr.paris.lutece.plugins.announce.business.Announce;
 import fr.paris.lutece.plugins.announce.business.AnnounceHome;
 import fr.paris.lutece.plugins.announce.service.AnnouncePlugin;
 import fr.paris.lutece.plugins.announce.service.announcesearch.AnnounceSearchItem;
-import fr.paris.lutece.plugins.announce.utils.AnnounceIndexerUtils;
 import fr.paris.lutece.plugins.announce.utils.AnnounceUtils;
 import fr.paris.lutece.plugins.search.solr.business.field.Field;
 import fr.paris.lutece.plugins.search.solr.indexer.SolrIndexer;
@@ -88,7 +87,7 @@ public class SolrAnnounceIndexer implements SolrIndexer
     {
         super(  );
 
-        LIST_RESSOURCES_NAME.add( AnnounceIndexerUtils.CONSTANT_TYPE_RESOURCE );
+        LIST_RESSOURCES_NAME.add( Announce.RESOURCE_TYPE );
     }
 
     /**
@@ -242,7 +241,7 @@ public class SolrAnnounceIndexer implements SolrIndexer
         item.setUrl( strUrl );
 
         // Setting the Uid field
-        item.setUid( getResourceUid( String.valueOf( announce.getId( ) ), AnnounceIndexerUtils.CONSTANT_TYPE_RESOURCE ) );
+        item.setUid( getResourceUid( String.valueOf( announce.getId( ) ), Announce.RESOURCE_TYPE ) );
 
         // Setting the Date field
         item.setDate( announce.getDateCreation(  ) );
