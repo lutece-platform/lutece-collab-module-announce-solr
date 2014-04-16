@@ -35,6 +35,7 @@ package fr.paris.lutece.plugins.announce.modules.solr.search;
 
 import fr.paris.lutece.plugins.announce.business.Announce;
 import fr.paris.lutece.plugins.announce.business.AnnounceHome;
+import fr.paris.lutece.plugins.announce.business.AnnounceSort;
 import fr.paris.lutece.plugins.announce.service.AnnouncePlugin;
 import fr.paris.lutece.plugins.announce.service.announcesearch.AnnounceSearchItem;
 import fr.paris.lutece.plugins.announce.utils.AnnounceUtils;
@@ -129,7 +130,7 @@ public class SolrAnnounceIndexer implements SolrIndexer
         
         // Announces
         // Add SolrItem for each announce 
-        for ( Announce announce : AnnounceHome.findAllPublished( ) )
+        for ( Announce announce : AnnounceHome.findAllPublished( AnnounceSort.DEFAULT_SORT ) )
         {
         	try
         	{
@@ -189,7 +190,7 @@ public class SolrAnnounceIndexer implements SolrIndexer
         List<SolrItem> listDocs = new ArrayList<SolrItem>(  );
         Plugin plugin = PluginService.getPlugin( AnnouncePlugin.PLUGIN_NAME );
 
-        for ( Announce announce : AnnounceHome.findAllPublished( ) )
+        for ( Announce announce : AnnounceHome.findAllPublished( AnnounceSort.DEFAULT_SORT ) )
         {
             if ( !announce.getSuspended(  ) && !announce.getSuspendedByUser(  ) )
             {
