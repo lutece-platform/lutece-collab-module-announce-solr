@@ -51,11 +51,20 @@ import fr.paris.lutece.portal.service.util.AppLogService;
 import fr.paris.lutece.portal.service.util.AppPropertiesService;
 import fr.paris.lutece.util.url.UrlItem;
 
-import org.apache.lucene.demo.html.HTMLParser;
+import org.apache.tika.exception.TikaException;
+import org.apache.tika.metadata.Metadata;
+import org.apache.tika.parser.ParseContext;
+import org.apache.tika.parser.html.HtmlParser;
+import org.apache.tika.sax.BodyContentHandler;
+import org.xml.sax.ContentHandler;
+import org.xml.sax.SAXException;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Reader;
 import java.io.StringReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -250,20 +259,20 @@ public class SolrAnnounceIndexer implements SolrIndexer
         // Setting the Content field
         String strContentToIndex = getContentToIndex( announce, plugin );
 
-        StringReader readerPage = new StringReader( strContentToIndex );
-        HTMLParser parser = new HTMLParser( readerPage );
+        HtmlParser parser = new HtmlParser(  );
+        ContentHandler handler = new BodyContentHandler();
+        Metadata metadata = new Metadata();
+        InputStream stream = new ByteArrayInputStream(strContentToIndex.getBytes(StandardCharsets.UTF_8));
+        try {
+			parser.parse(stream,  handler, metadata, new ParseContext());
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (TikaException e) {
+			e.printStackTrace();
+		}
 
-        Reader reader = parser.getReader(  );
-        int c;
-        StringBuffer sb = new StringBuffer(  );
-
-        while ( ( c = reader.read(  ) ) != -1 )
-        {
-            sb.append( String.valueOf( (char) c ) );
-        }
-
-        reader.close(  );
-        item.setContent( sb.toString(  ) );
+        
+        item.setContent( handler.toString(  ) );
 
         // Setting the Title field
         item.setTitle( announce.getTitle(  ) );
